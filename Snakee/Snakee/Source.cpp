@@ -15,7 +15,7 @@ using namespace std;
 
 int x[20];
 int y[20];
-int length = 5;                               //sta³a struktur robaka
+int length = 5;                               //sta³a struktura robaka
 int score = 0;                                //poczatkowy wynik gry to 0
 int last_key = right;                         //kierunek robaka na starcie gry standardowo jest w prawo
 bool feed = false;                            //sta³a boolowska odpowiadajaca czy * jest ju¿ na planszy czy nie, w pocz¹tkowym stadium gry * nie ma
@@ -31,8 +31,14 @@ int main()
 {
 	int i;
 	srand(time(NULL));
-	gotoxy(20, 20);
-	cout << "Wcisnij klawisz enter, aby kontynuowac...";
+	gotoxy(15, 15);
+	cout << "Press enter to continue...";
+	gotoxy(5, 5);
+	cout << "Controls: \n   -Move Up - Arrow Up, \n   -Move Down - Arrow Down, \n   -Move Left - Arrow Left, \n   -Move Right - Arrow Right ";
+	gotoxy(2, 2);
+	cout << "Hello in Snakee Game !";
+	gotoxy(2, 3);
+	cout << "Little Help: You cannot eat yourself. You cannot hit the boundaries. If you score 20 points You will win!";
 	getchar();
 	system("cls");
 	wall();                                    //tworzenie planszy
@@ -43,7 +49,7 @@ int main()
 	}
 	while (1)
 	{
-		gotoxy(68, 1);   cout << "Wynik: " << score;             //wyswietlanie zdobytych * z boku planszy
+		gotoxy(68, 5);   cout << "Score: " << score;             //wyswietlanie zdobytych * z boku planszy
 		food();
 		for (i = length - 1; i>0; i--)                         //pêtla przesuwajaca segmenty robaka
 		{
@@ -66,12 +72,12 @@ int main()
 		key_press();
 
 		//jezeli gracz zdobyl 10 punktow to wygrywa
-		if (score == 10)
+		if (score == 20)
 		{
 			Sleep(2000);
 			system("cls");
 			gotoxy(20, 20);
-			cout << "Wygrales! Zdobyles maksymalna ilosc punktow.\n";
+			cout << "You Win! You reached max score!\n";
 			gotoxy(20, 21);
 			break;
 		}
@@ -81,7 +87,7 @@ int main()
 			Sleep(2000);
 			system("cls");
 			gotoxy(15, 20);
-			cout << "Udzerzyles w sciane. Przegrales!";
+			cout << "You hit the boundary. You lose. Try again.! Your score: " << score << "\n";
 			break;
 		}
 		//jezeli robak najedzie na siebie to gracz przegrywa
@@ -91,7 +97,7 @@ int main()
 				Sleep(2000);
 				system("cls");
 				gotoxy(15, 20);
-				cout << "Wjechales sam na siebie. Przegrales!" << " Twoj wynik to: " << score;
+				cout << "You ate yourself. You lose. Try again! Your score: " << score<< "\n";
 				Sleep(3000);
 				getchar();
 				return 1;
@@ -99,7 +105,7 @@ int main()
 			}
 		Sleep(50);
 	}
-	cout << " Twoj wynik to: " << score;
+	
 	Sleep(3000); getchar();
 	return 0;
 }
